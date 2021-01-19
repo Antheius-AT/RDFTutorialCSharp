@@ -14,12 +14,6 @@ namespace RDFTutorialLogic
         /// <param name="args"></param>
         public static void Main()
         {
-            var engine = new FileHelperEngine<Triple>();
-          
-            var result = engine.ReadFile("text.csv");
-            var triple = new Triple();
-            triple.
-
         }
     }
 }
