@@ -6,7 +6,7 @@
     internal class Triple
     {
         /// <summary>
-        /// Gets or sets the subject of the triple.
+        /// Gets the subject of the triple.
         /// </summary>
         public string Subject
         {
@@ -14,7 +14,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the predicate of the triple.
+        /// Gets the predicate of the triple.
         /// </summary>
         public string Predicate
         {
@@ -22,7 +22,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the object of the triple.
+        /// Gets the object of the triple.
         /// </summary>
         public string @Object
         {
