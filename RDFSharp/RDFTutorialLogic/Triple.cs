@@ -1,7 +1,7 @@
 ﻿namespace RDFTutorialLogic
 {
     /// <summary>
-    /// Represents the class for storinn the data of a triple.
+    /// Represents the class for storing the data of a triple.
     /// </summary>
     internal class Triple
     {
