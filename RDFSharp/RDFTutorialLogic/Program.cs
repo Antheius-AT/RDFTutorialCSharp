@@ -2,11 +2,17 @@
 
 namespace RDFTutorialLogic
 {
-    class Program
+    /// <summary>
+    /// Represents the program class with entry point of the application.
+    /// </summary>
+    public static class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Represents the entry point of the application.
+        /// </summary>
+        /// <param name="args"></param>
+        public static void Main()
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }
