@@ -58,5 +58,14 @@ namespace RDFTutorialLogic.Data
         {
             get;
         }
+
+        /// <summary>
+        /// Overrides the <see cref="Object.ToString"/> method.
+        /// </summary>
+        /// <returns>A string representation of this object.</returns>
+        public override string ToString()
+        {
+            return $"{this.Subject} {this.Predicate} {this.Object}";
+        }
     }
 }

@@ -2,7 +2,10 @@
 
 namespace RDFTutorialLogic
 {
+    using System.Collections.Generic;
     using FileHelpers;
+    using RDFTutorialLogic.Data;
+
     /// <summary>
     /// Represents the program class with entry point of the application.
     /// </summary>
@@ -14,6 +17,11 @@ namespace RDFTutorialLogic
         /// <param name="args"></param>
         public static void Main()
         {
+            var data = new List<string>() { "Berg", "istHoch", "Martin" };
+            var tripleParser = new TripleParser();
+            var triple = tripleParser.Parse(new RawTripleData(data));
+
+
         }
     }
 }
