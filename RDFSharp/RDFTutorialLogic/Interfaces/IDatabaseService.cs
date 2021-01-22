@@ -12,7 +12,7 @@ namespace RDFTutorialLogic.Interfaces
     using RDFTutorialLogic.Data;
 
     /// <summary>
-    /// Represent an object capable of handling database transactions.
+    /// Represents an object capable of handling database transactions.
     /// </summary>
     public interface IDatabaseService
     {
@@ -26,7 +26,7 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        Task<bool> TryStoreInDatabaseAsync(Triple triple);
+        Task<DatabaseQuerySuccessResult> TryStoreInDatabaseAsync(Triple triple);
 
         /// <summary>
         /// Asynchronously retrieves all triples from the database matching 
@@ -43,7 +43,7 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="ArgumentException">
         /// Is thrown if either of the parameters are an empty string.
         /// </exception>
-        Task<bool> TryRetrieveFromDatabaseAsync(string subject, string predicate, string @object, out IEnumerable<Triple> result);
+        Task<DatabaseQueryDataResult<IEnumerable<Triple>>> TryRetrieveFromDatabaseAsync(string subject, string predicate, string @object);
 
         /// <summary>
         /// Asynchronously tries to delete the specified triple.
@@ -56,6 +56,6 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        Task<bool> TryDeleteFromDatabaseAsync(Triple triple);
+        Task<DatabaseQuerySuccessResult> TryDeleteFromDatabaseAsync(Triple triple);
     }
 }

@@ -78,7 +78,7 @@ namespace RDFTutorialUI.Models
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        public Task<bool> TryDeleteFromDatabaseAsync(Triple triple)
+        public async Task<DatabaseQuerySuccessResult> TryDeleteFromDatabaseAsync(Triple triple)
         {
             throw new NotImplementedException();
         }
@@ -98,7 +98,7 @@ namespace RDFTutorialUI.Models
         /// <exception cref="ArgumentException">
         /// Is thrown if either of the parameters are an empty string.
         /// </exception>
-        public Task<bool> TryRetrieveFromDatabaseAsync(string subject, string predicate, string @object, out IEnumerable<Triple> result)
+        public async Task<DatabaseQueryDataResult<IEnumerable<Triple>>> TryRetrieveFromDatabaseAsync(string subject, string predicate, string @object)
         {
             throw new NotImplementedException();
         }
@@ -113,7 +113,7 @@ namespace RDFTutorialUI.Models
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        public Task<bool> TryStoreInDatabaseAsync(Triple triple)
+        public async Task<DatabaseQuerySuccessResult> TryStoreInDatabaseAsync(Triple triple)
         {
             throw new NotImplementedException();
         }
