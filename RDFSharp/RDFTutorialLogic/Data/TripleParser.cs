@@ -1,20 +1,20 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ITripleParser.cs" company="FHWN">
+// <copyright file="TripleParser.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
 // <author>Gregor Faiman</author>
 //-----------------------------------------------------------------------
-namespace RDFTutorialLogic.Interfaces
+using RDFTutorialLogic.Interfaces;
+
+namespace RDFTutorialLogic.Data
 {
     using System;
-    using RDFTutorialLogic.Data;
     using RDFTutorialLogic.Exceptions;
 
     /// <summary>
-    /// Represents an object capable of parsing objects of type <see cref="RawTripleData"/> into
-    /// the <see cref="Triple"/> type.
+    /// Represent an object capable of parsing triples from raw triple data.
     /// </summary>
-    public interface ITripleParser
+    public class TripleParser : ITripleParser
     {
         /// <summary>
         /// Parses raw triple data into a <see cref="Triple"/> object.
@@ -27,6 +27,9 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="TripleParsingFailedException">
         /// Is thrown if the data could not be converted into a triple.
         /// </exception>
-        Triple Parse(RawTripleData data);
+        public Triple Parse(RawTripleData data)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
