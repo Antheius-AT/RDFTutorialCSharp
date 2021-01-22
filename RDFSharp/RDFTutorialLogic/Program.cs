@@ -21,7 +21,9 @@ namespace RDFTutorialLogic
             var tripleParser = new TripleParser();
             var triple = tripleParser.Parse(new RawTripleData(data));
 
-
+            Console.WriteLine(triple);
+            Console.ReadKey(true);
         }
     }
 }
+

@@ -9,9 +9,10 @@ This component is responsible for reading data from a specified file. This versi
 ### Distribution
 
 Components Gregor: 
-* Raw Triple Data 
-* Parser
+* Raw Triple Data (done)
+* Parser (done)
 * Database Service
+* Triple store
 
 Components Tom:
 * Triple (done)
