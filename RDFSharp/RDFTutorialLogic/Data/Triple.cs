@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace RDFTutorialLogic
+namespace RDFTutorialLogic.Data
 {
     /// <summary>
     /// Represents the class for storing the data of a triple.
     /// </summary>
-    internal class Triple
+    public class Triple
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Triple"/> class.

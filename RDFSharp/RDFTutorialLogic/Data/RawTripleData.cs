@@ -7,7 +7,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RDFTutorialLogic
+namespace RDFTutorialLogic.Data
 {
     /// <summary>
     /// Represents triple data that was read from an external source, and has
