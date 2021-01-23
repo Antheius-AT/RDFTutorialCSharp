@@ -54,6 +54,43 @@ If you attempt to call this method specifying an empty string, it will throw an 
 This method, being async, returns a task object handling the logic, which is awaitable.
 On termination the task returns a System.Collections.Generic.IEnumerable<Triple> object, containing all of the matching triples.
 
+### Triple Parser
+The Triple Parser class offers a single method to parse triples from objects of type RDFTutorialLogic.Data.RawTripleData, which is returned when using the Data Reader class
+for reading triple data from an external source.
+
+The single method for parsing triples is:
+* public Triple Parse(RawTripleData data)
+
+This method may throw two kinds of exceptions:
+* System.ArgumentNullException is thrown if you pass a null reference as an argument while invoking the method.
+* REDFTutorialLogic.Exceptions.TripleParsingFailedException is thrown if the parsing of the specified data failed. 
+
+Given the nature of triples and the fact that no validation apart from whether or not actual data is specified needs to happen, the TripleParsingFailedException is only thrown,
+if the Data property of the RDFTutorialLogic.Data.RawTripleData type, which we will explain in the next section, does not contain exactly three string objects.
+
+If you are able to ensure that the RawTripleData object you pass as an argument to this method, does in fact contain exactly three strings in its Data property, you are not required
+to specify a try-catch clause.
+
+This class implements the ***RDFTutorialLogic.Interfaces.ITripleParser*** interface.
+This means, that if you want to specify your own triple parser and choose to not use the triple parser being implemented by default, you are able to implement this interface, write your own implementation,
+and use that implementation instead.
+
+### Raw Triple Data
+The Raw Triple Data represents some data that has been read from an external source, however has yet to be parsed into an actual Triple.
+It contains one member, being a System.IEnumerable<string> property called Data. 
+When using the DataReader class to read data from an external source, one or more objects of this type are returned.
+
+The Triple Parser class, which was talked about in the previous section, is able to parse raw data into concrete objects of type triple.
+
+While a triple is an object specified in the format Subject-Predicate-Object, any object of type RawTripleData may have more or less elements stored in its
+Data property. 
+This is due to the fact, that from the applications point of view, the RawTripleData has not yet been confirmed as being a triple, thus the RawTripleData is not required to
+follow the known triple format. 
+However, be aware that trying to parse raw triple data into a Triple object using the aforementioned TripleParser, will lead to an exception being thrown.
+
+### Database Service
+TODO
+
 ### Data Reader
 This component is responsible for reading data from a specified file. This version of the RDF Sharp library only supports csv files.
 
