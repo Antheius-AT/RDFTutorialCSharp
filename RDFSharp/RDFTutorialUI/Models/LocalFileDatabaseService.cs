@@ -98,7 +98,7 @@ namespace RDFTutorialUI.Models
         /// <exception cref="ArgumentException">
         /// Is thrown if either of the parameters are an empty string.
         /// </exception>
-        public async Task<DatabaseQueryDataResult<IEnumerable<Triple>>> TryRetrieveFromDatabaseAsync(string subject, string predicate, string @object)
+        public async Task<DatabaseQueryDataResult<IEnumerable<Triple>>> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object)
         {
             throw new NotImplementedException();
         }
