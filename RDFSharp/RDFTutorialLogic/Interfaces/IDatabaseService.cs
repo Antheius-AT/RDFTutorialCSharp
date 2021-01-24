@@ -43,7 +43,7 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="ArgumentException">
         /// Is thrown if either of the parameters are an empty string.
         /// </exception>
-        Task<DatabaseQueryDataResult<IEnumerable<Triple>>> TryRetrieveFromDatabaseAsync(string subject, string predicate, string @object);
+        Task<DatabaseQueryDataResult<IEnumerable<Triple>>> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object);
 
         /// <summary>
         /// Asynchronously tries to delete the specified triple.

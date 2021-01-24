@@ -7,7 +7,6 @@
 namespace RDFTutorialLogic
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using RDFTutorialLogic.Data;
@@ -44,6 +43,9 @@ namespace RDFTutorialLogic
         /// </returns>
         public async Task<bool> TryAddTripleAsync(Triple triple)
         {
+            if (triple == null)
+                throw new ArgumentNullException(nameof(triple), "Triple to add must not be null.");
+
             var result = await this.databaseService.TryStoreInDatabaseAsync(triple);
 
             return result.Success;
@@ -56,8 +58,14 @@ namespace RDFTutorialLogic
         /// <returns>A task handling the logic and containing a value indicating
         /// whether the triple was successfully deleted in its result on termination.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Is thrown if triple is null.
+        /// </exception>
         public async Task<bool> TryDeleteTripleAsync(Triple triple)
         {
+            if (triple == null)
+                throw new ArgumentNullException(nameof(triple), "Triple to delete must not be null.");
+
             var result = await this.databaseService.TryDeleteFromDatabaseAsync(triple);
 
             return result.Success;
@@ -69,10 +77,27 @@ namespace RDFTutorialLogic
         /// <param name="subject">The specified subject.</param>
         /// <param name="predicate">The specified predicate.</param>
         /// <param name="object">The specified object.</param>
-        /// <returns></returns>
-        public Task<bool> TryRetrieveTriplesAsync(string subject, string predicate, string @object)
+        /// <returns>The triples returned from the database which match the specified pattern.</returns>
+        /// <exception cref="ArgumentException">
+        /// Is thrown if either of the parameters is an empty string.
+        /// </exception>
+        public async Task<IEnumerable<Triple>> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object)
         {
-            throw new NotImplementedException();
+            if (subject == string.Empty)
+                throw new ArgumentException(nameof(subject), "Subject to look for must not be empty. Use either null for an undefined value, or * to match all possible values");
+           
+            if (predicate == string.Empty)
+                throw new ArgumentException(nameof(subject), "Predicate to look for must not be empty. Use either null for an undefined value, or * to match all possible values");
+
+            if (@object == string.Empty)
+                throw new ArgumentException(nameof(subject), "Object to look for must not be empty. Use either null for an undefined value, or * to match all possible values");
+
+            var result = await this.databaseService.RetrieveMatchingTriplesAsync(subject, predicate, @object);
+
+            if (!result.Success)
+                return Array.Empty<Triple>();
+
+            return result.Data;
         }
     }
 }
