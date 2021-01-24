@@ -31,16 +31,25 @@ namespace RDFTutorialUI.Models
         private FileHelperEngine<Triple> fileHelper;
 
         /// <summary>
+        /// Object capable of reading and writing to files on disk.
+        /// </summary>
+        private IDataReader dataReader;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="LocalFileDatabaseService"/> class.
         /// </summary>
         /// <param name="filePath">The path to the database file.</param>
         /// <exception cref="ArgumentException">
         /// Is thrown if the specified path does not lead to a CSV file.
         /// </exception>
-        public LocalFileDatabaseService(string filePath)
+        /// <exception cref="ArgumentNullException">
+        /// Is thrown the data reader is null.
+        /// </exception>
+        public LocalFileDatabaseService(string filePath, IDataReader dataReader)
         {
             this.fileHelper = new FileHelperEngine<Triple>();
             this.FilePath = filePath;
+            this.dataReader = dataReader ?? throw new ArgumentNullException(nameof(dataReader), "Data Reader must not be null.");
         }
 
         /// <summary>
