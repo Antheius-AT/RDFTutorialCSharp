@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="DatabaseQuerySuccessResult.cs" company="FHWN">
+// <copyright file="IDataReader.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
 // <author>Tom Pirich</author>
@@ -10,7 +10,7 @@ namespace RDFTutorialLogic.Interfaces
     using Data;
 
     /// <summary>
-    /// Represents the interface for reading in data.
+    /// Represents the interface for reading in data from an external source.
     /// </summary>
     public interface IDataReader
     {
