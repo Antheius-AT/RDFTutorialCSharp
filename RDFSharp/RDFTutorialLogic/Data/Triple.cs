@@ -1,7 +1,13 @@
-﻿using System;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="Triple.cs" company="FHWN">
+//     Copyright (c) FHWN. All rights reserved.
+// </copyright>
+// <author>Tom Pirich</author>
+//-----------------------------------------------------------------------
 namespace RDFTutorialLogic.Data
 {
+    using System;
+
     /// <summary>
     /// Represents the class for storing the data of a triple.
     /// </summary>
@@ -21,15 +27,21 @@ namespace RDFTutorialLogic.Data
         /// </exception>
         public Triple(string subject, string predicate, string @object)
         {
-            if (subject == string.Empty)
-                throw new ArgumentOutOfRangeException(nameof(subject), "The length of the subject has to be greater than 0 or null.");
+            if (string.IsNullOrWhiteSpace(subject))
+            {
+                throw new ArgumentOutOfRangeException(nameof(subject), "The subject must contain content an cannot be null.");
+            }
 
-            if (predicate == string.Empty)
-                throw new ArgumentOutOfRangeException(nameof(predicate), "The length of the subject has to be greater than 0 or null.");
+            if (string.IsNullOrWhiteSpace(predicate))
+            {
+                throw new ArgumentOutOfRangeException(nameof(predicate), "The predicate must contain content an cannot be null.");
+            }
 
-            if (@object == string.Empty)
-                throw new ArgumentOutOfRangeException(nameof(@object), "The length of the subject has to be greater than 0 or null.");
-
+            if (string.IsNullOrWhiteSpace(@object))
+            {
+                throw new ArgumentOutOfRangeException(nameof(@object), "The object must contain content an cannot be null.");
+            }
+              
             this.Subject = subject;
             this.Predicate = predicate;
             this.Object = @object;
