@@ -17,11 +17,16 @@ namespace RDFTutorialLogic
         /// <param name="args"></param>
         public static void Main()
         {
-            var data = new List<string>() { "Berg", "istHoch", "Martin" };
-            var tripleParser = new TripleParser();
-            var triple = tripleParser.Parse(new RawTripleData(data));
+            //var data = new List<string>() { "Berg", "istHoch", "Martin" };
+            //var tripleParser = new TripleParser();
+            //var triple = tripleParser.Parse(new RawTripleData(data));
 
-            Console.WriteLine(triple);
+            var dataReader = new CSVDataReader();
+            var data = dataReader.Read(@"E:\Test.csv");
+
+            foreach (var item in data)
+                Console.WriteLine(item);
+            
             Console.ReadKey(true);
         }
     }
