@@ -4,11 +4,11 @@
 // </copyright>
 // <author>Gregor Faiman</author>
 //-----------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-
 namespace RDFTutorialLogic.Data
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Represents triple data that was read from an external source, and has
     /// not yet been parsed.
@@ -25,8 +25,6 @@ namespace RDFTutorialLogic.Data
         public RawTripleData(IEnumerable<string> data)
         {
             this.Data = data ?? throw new ArgumentNullException(nameof(data), "Data must not be null.");
-
-            this.Data = data;
         }
 
         /// <summary>
