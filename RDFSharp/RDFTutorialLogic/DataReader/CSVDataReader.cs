@@ -21,14 +21,14 @@ namespace RDFTutorialLogic
         /// <summary>
         /// This component helps us reading data from csv files.
         /// </summary>
-        private readonly FileHelperEngine<CsvTripleDataFormat> fileReaderEngine;
+        private readonly FileHelperEngine<RawTripleData> fileReaderEngine;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CSVDataReader"/> class.
         /// </summary>
         public CSVDataReader()
         {
-            this.fileReaderEngine = new FileHelperEngine<CsvTripleDataFormat>(encoding: Encoding.UTF8);
+            this.fileReaderEngine = new FileHelperEngine<RawTripleData>(encoding: Encoding.UTF8);
         }
 
         /// <summary>
@@ -38,13 +38,13 @@ namespace RDFTutorialLogic
         /// <returns>Returns a collection of raw triples.</returns>
         /// <exception cref="IOException">
         /// ... is thrown when the file does not exist.
-        /// ... is thrown when the file extension is invalid, expected is .csv file.
+        /// ... is thrown when the file extension is invalid. => Expected is a .csv file.
         /// </exception>
-        public IEnumerable<CsvTripleDataFormat> Read(string path)
+        public IEnumerable<RawTripleData> Read(string path)
         {
             if (!File.Exists(path))
             {
-                throw new IOException("The reader only handles .csv files.");
+                throw new IOException("The file does not exist.");
             }
 
             var extension = Path.GetExtension(path);
@@ -57,5 +57,6 @@ namespace RDFTutorialLogic
 
             return this.fileReaderEngine.ReadFile(path);
         }
+
     }
 }
