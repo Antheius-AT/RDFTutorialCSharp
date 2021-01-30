@@ -19,6 +19,6 @@ namespace RDFTutorialLogic.Interfaces
         /// </summary>
         /// <param name="path">The path to the file.</param>
         /// <returns>A collection of raw triple data which will be processed further.</returns>
-        IEnumerable<CsvTripleDataFormat> Read(string path);
+        IEnumerable<RawTripleData> Read(string path);
     }
 }
