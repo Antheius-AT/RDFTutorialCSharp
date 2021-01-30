@@ -3,3 +3,8 @@ Subject, Predicate, Object
 Hallo,liegt in,BB
 Tom,liegt in,Bett
 Gregor,ist,ein Mensch 
+Martin,hat,Kein Geld
+,,
+Woltron,ist,Studiengangsleiter
+Woltron,ist,ein Mensch
+Woltron ,hat,Geld

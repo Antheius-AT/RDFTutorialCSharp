@@ -18,11 +18,6 @@ namespace RDFTutorialLogic
     public class TripleStore
     {
         /// <summary>
-        /// Service used for accessing the triple database.
-        /// </summary>
-        private IDatabaseService databaseService;
-
-        /// <summary>
         /// An object containing the collection of triples, allowing for modification.
         /// </summary>
         private RDFGraph tripleGraph;
@@ -39,9 +34,8 @@ namespace RDFTutorialLogic
         /// <exception cref="ArgumentNullException">
         /// Is thrown if database service is null.
         /// </exception>
-        public TripleStore(IDatabaseService databaseService, string uriPrefix)
+        public TripleStore(string uriPrefix)
         {
-            this.databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService), "Database service must not be null.");
             this.tripleGraph = new RDFGraph();
             this.uriPrefix = uriPrefix ?? throw new ArgumentNullException(nameof(uriPrefix), "URI prefix must not be null.");
         }
@@ -53,16 +47,15 @@ namespace RDFTutorialLogic
         /// <returns>A task handling the logic and containing a value indicating
         /// whether the triple was successfully added in its result on termination.
         /// </returns>
-        public bool TryAddTripleAsync(Triple triple)
+        public bool TryAddTriple(RDFTriple triple)
         {
             if (triple == null)
                 throw new ArgumentNullException(nameof(triple), "Triple to add must not be null.");
 
-            var rdfTriple = new RDFTriple(new RDFResource(triple.Subject), new RDFResource(triple.Predicate), new RDFResource(triple.Object));
-            var exists = tripleGraph.ContainsTriple(rdfTriple);
+            var exists = tripleGraph.ContainsTriple(triple);
 
             if (!exists)
-                this.tripleGraph.AddTriple(rdfTriple);
+                this.tripleGraph.AddTriple(triple);
 
             return !exists;
         }
