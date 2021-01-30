@@ -7,7 +7,6 @@
 namespace RDFTutorialLogic.Data
 {
     using System;
-    using System.Collections.Generic;
     using FileHelpers;
 
     /// <summary>
