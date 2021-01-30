@@ -7,6 +7,7 @@
 namespace RDFTutorialLogic.Interfaces
 {
     using System;
+    using RDFSharp.Model;
     using RDFTutorialLogic.Data;
     using RDFTutorialLogic.Exceptions;
 
@@ -27,6 +28,6 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="TripleParsingFailedException">
         /// Is thrown if the data could not be converted into a triple.
         /// </exception>
-        Triple Parse(RawTripleData data);
+        RDFTriple Parse(RawTripleData data);
     }
 }

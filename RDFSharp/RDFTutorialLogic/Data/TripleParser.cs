@@ -10,6 +10,7 @@ namespace RDFTutorialLogic.Data
 {
     using System;
     using System.Linq;
+    using RDFSharp.Model;
     using RDFTutorialLogic.Exceptions;
 
     /// <summary>
@@ -21,6 +22,24 @@ namespace RDFTutorialLogic.Data
         /// Represents the minimum length for a subject, predicate or object.
         /// </summary>
         private const int minimumLength = 1;
+
+        /// <summary>
+        /// A string representing the uri prefix of resources.
+        /// </summary>
+        private string uriPrefix;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TripleParser"/> class.
+        /// </summary>
+        /// <param name="uriPrefix">The uri prefix used to locate resources.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Is thrown if uri prefix is null.
+        /// </exception>
+        public TripleParser(string uriPrefix)
+        {
+            this.uriPrefix = uriPrefix ?? throw new ArgumentNullException(nameof(uriPrefix), "Uri prefix must not be null.");
+        }
+
         /// <summary>
         /// Parses raw triple data into a <see cref="Triple"/> object.
         /// </summary>
@@ -32,18 +51,15 @@ namespace RDFTutorialLogic.Data
         /// <exception cref="TripleParsingFailedException">
         /// Is thrown if the data could not be converted into a triple.
         /// </exception>
-        public Triple Parse(RawTripleData data)
+        public RDFTriple Parse(RawTripleData data)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data), "Data to parse into a triple must not be null.");
 
-
             if (!ValidateRawTripleConstraints(data.Subject, data.Predicate, data.Object))
-            {
                 throw new TripleParsingFailedException("The raw triple does not correspond the constraints.");
-            }
 
-            Triple triple;
+            RDFTriple triple;
             string subject;
             string predicate;
             string @object;
@@ -52,7 +68,7 @@ namespace RDFTutorialLogic.Data
             predicate = data.Predicate;
             @object = data.Object;
 
-            triple = new Triple(subject, predicate, @object);
+            triple = new RDFTriple(new RDFResource($"{this.uriPrefix}:{subject}"), new RDFResource($"{this.uriPrefix}:{predicate}"), new RDFResource($"{this.uriPrefix}:{@object}"));
 
             return triple;
         }
