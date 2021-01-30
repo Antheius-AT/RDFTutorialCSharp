@@ -22,10 +22,14 @@ namespace RDFTutorialLogic
             //var triple = tripleParser.Parse(new RawTripleData(data));
 
             var dataReader = new CSVDataReader();
-            var data = dataReader.Read(@"E:\VisualStudio\Visual C#\RDFTutorialCSharp\TestCSVData\Test.csv");
+            var data = dataReader.ReadFiles(@"E:\VisualStudio\Visual C#\RDFTutorialCSharp\TestCSVData\Test.csv", @"E:\VisualStudio\Visual C#\RDFTutorialCSharp\TestCSVData\Test2.csv");
 
-            foreach (var item in data)
-                Console.WriteLine(item);
+            foreach (var tripleData in data)
+                foreach (var triple in tripleData)
+                {
+                    Console.WriteLine(triple);
+                }
+           
             
             Console.ReadKey(true);
         }
