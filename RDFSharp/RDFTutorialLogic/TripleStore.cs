@@ -12,6 +12,7 @@ namespace RDFTutorialLogic
     using RDFTutorialLogic.Data;
     using RDFTutorialLogic.Interfaces;
     using RDFSharp.Store;
+    using RDFSharp.Model;
 
     /// <summary>
     /// Represents a triple store, supporting the management of triples.
@@ -24,15 +25,27 @@ namespace RDFTutorialLogic
         private IDatabaseService databaseService;
 
         /// <summary>
+        /// An object containing the collection of triples, allowing for modification.
+        /// </summary>
+        private RDFGraph tripleGraph;
+
+        /// <summary>
+        /// A string representing the uri prefix of resources.
+        /// </summary>
+        private string uriPrefix;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TripleStore"/> class.
         /// </summary>
         /// <param name="databaseService">The service used for accessing the triple database.</param>
         /// <exception cref="ArgumentNullException">
         /// Is thrown if database service is null.
         /// </exception>
-        public TripleStore(IDatabaseService databaseService)
+        public TripleStore(IDatabaseService databaseService, string uriPrefix)
         {
             this.databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService), "Database service must not be null.");
+            this.tripleGraph = new RDFGraph();
+            this.uriPrefix = uriPrefix ?? throw new ArgumentNullException(nameof(uriPrefix), "URI prefix must not be null.");
         }
 
         /// <summary>
@@ -42,14 +55,18 @@ namespace RDFTutorialLogic
         /// <returns>A task handling the logic and containing a value indicating
         /// whether the triple was successfully added in its result on termination.
         /// </returns>
-        public async Task<bool> TryAddTripleAsync(Triple triple)
+        public Task<bool> TryAddTripleAsync(Triple triple)
         {
             if (triple == null)
                 throw new ArgumentNullException(nameof(triple), "Triple to add must not be null.");
 
-            var result = await this.databaseService.TryStoreInDatabaseAsync(triple);
+            var rdfTriple = new RDFTriple(new RDFResource(triple.Subject), new RDFResource(triple.Predicate), new RDFResource(triple.Object));
+            var exists = tripleGraph.ContainsTriple(rdfTriple);
 
-            return result.Success;
+            if (!exists)
+                this.tripleGraph.AddTriple(rdfTriple);
+
+            return Task.FromResult(!exists);
         }
 
         /// <summary>
@@ -67,6 +84,8 @@ namespace RDFTutorialLogic
             if (triple == null)
                 throw new ArgumentNullException(nameof(triple), "Triple to delete must not be null.");
 
+            var rdfTriple = new RDFTriple(new RDFResource(triple.Subject), new RDFResource(triple.Predicate), new RDFResource(triple.Object));
+            this.tripleGraph.RemoveTriple(rdfTriple);
             var result = await this.databaseService.TryDeleteFromDatabaseAsync(triple);
 
             return result.Success;

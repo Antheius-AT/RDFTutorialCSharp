@@ -24,3 +24,8 @@ Ein Graph implementiert einen IEnumerator.
 Grph.TriplesCount gibt die Anzahl an Triples zurück.
 
 Schaut so aus als könnte der Graph unser TripleStore sein.
+
+Es gibt wohl auch RDFContainer und RDFCollection, um eine Gruppe an Objekten in eine Entität zu vereinen.
+Beispiel Beatles --> Paul Mccartney, John Lennon, ...
+Wenn ich brauche nachlesen auf Seite 11 ff.
+
