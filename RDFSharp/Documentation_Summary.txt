@@ -1,31 +1,43 @@
-Es gibt beim Triple anlegen mit RDFSharp grunds‰tzlich zwei Arten, die Daten im Triple zu repr‰sentieren.
+ÔªøEs gibt beim Triple anlegen mit RDFSharp grundsÔøΩtzlich zwei Arten, die Daten im Triple zu reprÔøΩsentieren.
 
 Die Klassen: RDFPlainLiteral/RDFTypedLiteral
 Oder die Klasse: RDFResource
 
-RDFResource bekommt eine URI welche das Objekt beschreibt, ist f¸r unseren Anwendungsfall also wohl
-eher nebens‰chlich.
+RDFResource bekommt eine URI welche das Objekt beschreibt, ist fÔøΩr unseren Anwendungsfall also wohl
+eher nebensÔøΩchlich.
 
-RDFPlainLiteral bekommt einen String, welcher die Daten repr‰sentiert.
-RDFTypedLiteral bekommt einen String, welcher die Daten repr‰sentiert, und einen Typ, welcher den Typ des angegebenen Strings
-repr‰sentiert.
+RDFPlainLiteral bekommt einen String, welcher die Daten reprÔøΩsentiert.
+RDFTypedLiteral bekommt einen String, welcher die Daten reprÔøΩsentiert, und einen Typ, welcher den Typ des angegebenen Strings
+reprÔøΩsentiert.
 
 Ein Triple in RDFSharp ist ein Objekt welches aus 3 RDFResources oder RDFLiterals besteht.
 
-Beispiel w‰re: 
+Beispiel wÔøΩre: 
 new RDFTriple(new RDFPlainLiteral("Tom"), new RDFPlainLiteral("ist"), new RDFPlainLiteral("Ein Wappla"));
 
-Das Pr‰dikat darf nicht leer sein und wird von RDFSharp gepr¸ft. Falls leer, fliegt eine RDFModelException.
-Weiﬂ nicht was passiert wenn pr‰dikat NULL ist.
+Das PrÔøΩdikat darf nicht leer sein und wird von RDFSharp geprÔøΩft. Falls leer, fliegt eine RDFModelException.
+WeiÔøΩ nicht was passiert wenn prÔøΩdikat NULL ist.
 
 Ein Graph (RDFGraph) ist eine Ansammlung von Triples
 Graph kann auch von einem DataTable instanziert werden, per RDFGraph.FromDataTable(table);
 Ein Graph implementiert einen IEnumerator.
-Grph.TriplesCount gibt die Anzahl an Triples zur¸ck.
+Grph.TriplesCount gibt die Anzahl an Triples zurÔøΩck.
 
-Schaut so aus als kˆnnte der Graph unser TripleStore sein.
+Schaut so aus als k√∂nnte der Graph unser TripleStore sein.
 
-Es gibt wohl auch RDFContainer und RDFCollection, um eine Gruppe an Objekten in eine Entit‰t zu vereinen.
+Es gibt wohl auch RDFContainer und RDFCollection, um eine Gruppe an Objekten in eine Entit√§t zu vereinen.
 Beispiel Beatles --> Paul Mccartney, John Lennon, ...
 Wenn ich brauche nachlesen auf Seite 11 ff.
 
+Schaut so aus als k√∂nnte der Graph unser TripleStore sein.
+
+### Import von Triples aus CSV-Files 
+
+Dieses Kapitel besch√§ftigt sich mit dem Import von Triples aus CSV Dateien. 
+Die relevante Komponente daf√ºr ist der CSVDataReader. Dieser liest mit Hilfe des angegebenen Pfads, zur CSV-Datei, die Daten der Triple ein.
+Die Methodensignatur f√ºr das einlesen der Daten schaut, wie folgt, aus:
+
+```public IEnumerable<RawTripleData> Read(string path)```
+
+Hier bekommen wir in Form eines Enumberable unsere Raw Triples zur√ºck die dann in eine Ontologie integriert werden k√∂nnen. Doch davor werden diese an den sogenannten
+Triple parser √ºbergeben. Dieser validiert die Mindestanforderungen/ Contraints f√ºr ein Raw Triple. 
