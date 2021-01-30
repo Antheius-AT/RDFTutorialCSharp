@@ -1,37 +1,43 @@
-Es gibt beim Triple anlegen mit RDFSharp grundsätzlich zwei Arten, die Daten im Triple zu repräsentieren.
+ï»¿Es gibt beim Triple anlegen mit RDFSharp grundsï¿½tzlich zwei Arten, die Daten im Triple zu reprï¿½sentieren.
 
 Die Klassen: RDFPlainLiteral/RDFTypedLiteral
 Oder die Klasse: RDFResource
 
-RDFResource bekommt eine URI welche das Objekt beschreibt, ist für unseren Anwendungsfall also wohl
-eher nebensächlich.
+RDFResource bekommt eine URI welche das Objekt beschreibt, ist fï¿½r unseren Anwendungsfall also wohl
+eher nebensï¿½chlich.
 
-RDFPlainLiteral bekommt einen String, welcher die Daten repräsentiert.
-RDFTypedLiteral bekommt einen String, welcher die Daten repräsentiert, und einen Typ, welcher den Typ des angegebenen Strings
-repräsentiert.
+RDFPlainLiteral bekommt einen String, welcher die Daten reprï¿½sentiert.
+RDFTypedLiteral bekommt einen String, welcher die Daten reprï¿½sentiert, und einen Typ, welcher den Typ des angegebenen Strings
+reprï¿½sentiert.
 
 Ein Triple in RDFSharp ist ein Objekt welches aus 3 RDFResources oder RDFLiterals besteht.
 
-Beispiel wäre: 
+Beispiel wï¿½re: 
 new RDFTriple(new RDFPlainLiteral("Tom"), new RDFPlainLiteral("ist"), new RDFPlainLiteral("Ein Wappla"));
 
-Das Prädikat darf nicht leer sein und wird von RDFSharp geprüft. Falls leer, fliegt eine RDFModelException.
-Weiß nicht was passiert wenn prädikat NULL ist.
+Das Prï¿½dikat darf nicht leer sein und wird von RDFSharp geprï¿½ft. Falls leer, fliegt eine RDFModelException.
+Weiï¿½ nicht was passiert wenn prï¿½dikat NULL ist.
 
 Ein Graph (RDFGraph) ist eine Ansammlung von Triples
 Graph kann auch von einem DataTable instanziert werden, per RDFGraph.FromDataTable(table);
 Ein Graph implementiert einen IEnumerator.
-Grph.TriplesCount gibt die Anzahl an Triples zurück.
+Grph.TriplesCount gibt die Anzahl an Triples zurï¿½ck.
 
-Schaut so aus als könnte der Graph unser TripleStore sein.
+Schaut so aus als kÃ¶nnte der Graph unser TripleStore sein.
+
+Es gibt wohl auch RDFContainer und RDFCollection, um eine Gruppe an Objekten in eine EntitÃ¤t zu vereinen.
+Beispiel Beatles --> Paul Mccartney, John Lennon, ...
+Wenn ich brauche nachlesen auf Seite 11 ff.
+
+Schaut so aus als kÃ¶nnte der Graph unser TripleStore sein.
 
 ### Import von Triples aus CSV-Files 
 
-Dieses Kapitel beschäftigt sich mit dem Import von Triples aus CSV Dateien. 
-Die relevante Komponente dafür ist der CSVDataReader. Dieser liest mit Hilfe des angegebenen Pfads, zur CSV-Datei, die Daten der Triple ein.
-Die Methodensignatur für das einlesen der Daten schaut, wie folgt, aus:
+Dieses Kapitel beschÃ¤ftigt sich mit dem Import von Triples aus CSV Dateien. 
+Die relevante Komponente dafÃ¼r ist der CSVDataReader. Dieser liest mit Hilfe des angegebenen Pfads, zur CSV-Datei, die Daten der Triple ein.
+Die Methodensignatur fÃ¼r das einlesen der Daten schaut, wie folgt, aus:
 
 ```public IEnumerable<RawTripleData> Read(string path)```
 
-Hier bekommen wir in Form eines Enumberable unsere Raw Triples zurück die dann in eine Ontologie integriert werden können. Doch davor werden diese an den sogenannten
-Triple parser übergeben. Dieser validiert die Mindestanforderungen/ Contraints für ein Raw Triple. 
+Hier bekommen wir in Form eines Enumberable unsere Raw Triples zurÃ¼ck die dann in eine Ontologie integriert werden kÃ¶nnen. Doch davor werden diese an den sogenannten
+Triple parser Ã¼bergeben. Dieser validiert die Mindestanforderungen/ Contraints fÃ¼r ein Raw Triple. 
