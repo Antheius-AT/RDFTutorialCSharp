@@ -14,7 +14,7 @@ namespace RDFTutorialLogic
     using System.Text;
 
     /// <summary>
-    /// Represents an implementation of an <see cref="IDataReader"/> which responsible for reading from csv files.
+    /// Represents an implementation of an <see cref="IDataReader"/> which is responsible for reading in data from a csv files.
     /// </summary>
     public class CSVDataReader : IDataReader
     {
