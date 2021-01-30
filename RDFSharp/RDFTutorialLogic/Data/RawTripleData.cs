@@ -8,11 +8,15 @@ namespace RDFTutorialLogic.Data
 {
     using System;
     using System.Collections.Generic;
+    using FileHelpers;
 
     /// <summary>
     /// Represents triple data that was read from an external source, and has
     /// not yet been parsed.
     /// </summary>
+    [DelimitedRecord(",")]
+    [IgnoreFirst]
+    [IgnoreEmptyLines]
     public class RawTripleData
     {
         /// <summary>
@@ -22,17 +26,51 @@ namespace RDFTutorialLogic.Data
         /// <exception cref="ArgumentNullException">
         /// Is thrown if data is null.
         /// </exception>
-        public RawTripleData(IEnumerable<string> data)
+        //public RawTripleData(IEnumerable<string> data)
+        //{
+        //    this.Data = data ?? throw new ArgumentNullException(nameof(data), "Data must not be null.");
+        //}
+
+        /// <summary>
+        /// Gets or sets the subject of the triple.
+        /// </summary>
+        [FieldOrder(1)]
+        [FieldCaption(nameof(Subject))]
+        public string Subject
         {
-            this.Data = data ?? throw new ArgumentNullException(nameof(data), "Data must not be null.");
+            get;
+            set;
         }
 
         /// <summary>
-        /// Gets the raw data.
+        /// Gets or sets the predicate of the triple.
         /// </summary>
-        public IEnumerable<string> Data
+        [FieldOrder(2)]
+        [FieldCaption(nameof(Predicate))]
+        public string Predicate
         {
             get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the object of the triple.
+        /// </summary>
+        [FieldOrder(3)]
+        [FieldCaption(nameof(@Object))]
+        public string @Object
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Overrides the <see cref="Object.ToString"/> method.
+        /// </summary>
+        /// <returns>A string representation of this object.</returns>
+        public override string ToString()
+        {
+            return $"{this.Subject} {this.Predicate} {this.Object}";
         }
     }
 }
