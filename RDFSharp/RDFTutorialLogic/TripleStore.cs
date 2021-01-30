@@ -11,6 +11,7 @@ namespace RDFTutorialLogic
     using System.Threading.Tasks;
     using RDFTutorialLogic.Data;
     using RDFTutorialLogic.Interfaces;
+    using RDFSharp.Store;
 
     /// <summary>
     /// Represents a triple store, supporting the management of triples.

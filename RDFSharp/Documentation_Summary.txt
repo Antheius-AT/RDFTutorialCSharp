@@ -1,0 +1,26 @@
+Es gibt beim Triple anlegen mit RDFSharp grundsätzlich zwei Arten, die Daten im Triple zu repräsentieren.
+
+Die Klassen: RDFPlainLiteral/RDFTypedLiteral
+Oder die Klasse: RDFResource
+
+RDFResource bekommt eine URI welche das Objekt beschreibt, ist für unseren Anwendungsfall also wohl
+eher nebensächlich.
+
+RDFPlainLiteral bekommt einen String, welcher die Daten repräsentiert.
+RDFTypedLiteral bekommt einen String, welcher die Daten repräsentiert, und einen Typ, welcher den Typ des angegebenen Strings
+repräsentiert.
+
+Ein Triple in RDFSharp ist ein Objekt welches aus 3 RDFResources oder RDFLiterals besteht.
+
+Beispiel wäre: 
+new RDFTriple(new RDFPlainLiteral("Tom"), new RDFPlainLiteral("ist"), new RDFPlainLiteral("Ein Wappla"));
+
+Das Prädikat darf nicht leer sein und wird von RDFSharp geprüft. Falls leer, fliegt eine RDFModelException.
+Weiß nicht was passiert wenn prädikat NULL ist.
+
+Ein Graph (RDFGraph) ist eine Ansammlung von Triples
+Graph kann auch von einem DataTable instanziert werden, per RDFGraph.FromDataTable(table);
+Ein Graph implementiert einen IEnumerator.
+Grph.TriplesCount gibt die Anzahl an Triples zurück.
+
+Schaut so aus als könnte der Graph unser TripleStore sein.
