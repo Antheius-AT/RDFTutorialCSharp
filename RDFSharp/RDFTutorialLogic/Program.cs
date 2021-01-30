@@ -30,23 +30,36 @@ namespace RDFTutorialLogic
             //foreach (var item in data)
             //    Console.WriteLine(item);
 
-            var uri = new Uri("design.html", UriKind.RelativeOrAbsolute);
+            //var uri = new Uri("design.html", UriKind.RelativeOrAbsolute);
 
-            var res = new RDFResource("RDFDemoLibrary:TestTest");
-            var triple = new RDFTriple(res, res, res);
+            //var res = new RDFResource("RDFDemoLibrary:Test");
+            //var triple = new RDFTriple(res, res, res);
 
-            var graph = new RDFGraph();
-            graph.AddTriple(triple);
+            //var graph = new RDFGraph();
+            //graph.AddTriple(triple);
 
-            Console.WriteLine($"Contains Triple: {graph.ContainsTriple(triple)}");
+            //Console.WriteLine($"Contains Triple: {graph.ContainsTriple(triple)}");
 
-            var sameTriple = new RDFTriple(res, res, res);
+            //var sameTriple = new RDFTriple(res, res, res);
 
-            Console.WriteLine($"Contains same triple but other reference: {graph.ContainsTriple(sameTriple)}");
+            //Console.WriteLine($"Contains same triple but other reference: {graph.ContainsTriple(sameTriple)}");
 
-            graph.RemoveTriple(new RDFTriple(res, res, new RDFResource()));
+            //graph.RemoveTriple(new RDFTriple(res, res, new RDFResource()));
 
-            Console.ReadKey(true);
+            //graph.AddTriple(new RDFTriple(null, res, lit:null));
+
+            //foreach (var item in graph)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //var testtest = graph.SelectTriplesBySubject(new RDFResource());
+            //var anothertesttest = graph.SelectTriplesBySubject(new RDFResource("RDFDemoLibrary:Test"));
+            //var lastTest = graph.SelectTriplesBySubject(res);
+
+            //Console.ReadKey(true);
+
+            var reader = new CSVDataReader();
         }
     }
 }

@@ -8,10 +8,8 @@ namespace RDFTutorialLogic
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using RDFTutorialLogic.Data;
     using RDFTutorialLogic.Interfaces;
-    using RDFSharp.Store;
     using RDFSharp.Model;
 
     /// <summary>
@@ -55,7 +53,7 @@ namespace RDFTutorialLogic
         /// <returns>A task handling the logic and containing a value indicating
         /// whether the triple was successfully added in its result on termination.
         /// </returns>
-        public Task<bool> TryAddTripleAsync(Triple triple)
+        public bool TryAddTripleAsync(Triple triple)
         {
             if (triple == null)
                 throw new ArgumentNullException(nameof(triple), "Triple to add must not be null.");
@@ -66,7 +64,7 @@ namespace RDFTutorialLogic
             if (!exists)
                 this.tripleGraph.AddTriple(rdfTriple);
 
-            return Task.FromResult(!exists);
+            return !exists;
         }
 
         /// <summary>
@@ -79,16 +77,17 @@ namespace RDFTutorialLogic
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        public async Task<bool> TryDeleteTripleAsync(Triple triple)
+        public bool TryDeleteTripleAsync(RDFTriple triple)
         {
             if (triple == null)
                 throw new ArgumentNullException(nameof(triple), "Triple to delete must not be null.");
 
-            var rdfTriple = new RDFTriple(new RDFResource(triple.Subject), new RDFResource(triple.Predicate), new RDFResource(triple.Object));
-            this.tripleGraph.RemoveTriple(rdfTriple);
-            var result = await this.databaseService.TryDeleteFromDatabaseAsync(triple);
+            var contains = this.tripleGraph.ContainsTriple(triple);
 
-            return result.Success;
+            if (contains)
+                this.tripleGraph.RemoveTriple(triple);
+
+            return contains;
         }
 
         /// <summary>
@@ -101,10 +100,10 @@ namespace RDFTutorialLogic
         /// <exception cref="ArgumentException">
         /// Is thrown if either of the parameters is an empty string.
         /// </exception>
-        public async Task<IEnumerable<Triple>> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object)
+        public IEnumerable<RDFTriple> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object)
         {
             if (subject == string.Empty)
-                throw new ArgumentException(nameof(subject), "Subject to look for must not be empty. Use either null for an undefined value, or * to match all possible values");
+                throw new ArgumentException(nameof(subject), "Subject to look for must not be empty. Use null to omit a restriction for a specified parameter.");
            
             if (predicate == string.Empty)
                 throw new ArgumentException(nameof(subject), "Predicate to look for must not be empty. Use either null for an undefined value, or * to match all possible values");
@@ -112,12 +111,50 @@ namespace RDFTutorialLogic
             if (@object == string.Empty)
                 throw new ArgumentException(nameof(subject), "Object to look for must not be empty. Use either null for an undefined value, or * to match all possible values");
 
-            var result = await this.databaseService.RetrieveMatchingTriplesAsync(subject, predicate, @object);
+            if (subject != null && predicate != null && @object != null)
+                return this.tripleGraph.SelectTriplesBySubject(new RDFResource($"{this.uriPrefix}:{subject}"))
+                    .SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{predicate}"))
+                    .SelectTriplesByObject(new RDFResource($"{this.uriPrefix}:{predicate}"));
+            if (subject != null)
+            {
+                // Wert unbekannt unbekannt
+                // Wir wissen Subjekt ist Ungleich null, hat also einen Filter.
+                // Wir wissen außerdem dass mindestens eines von beiden null sein müssen.
+                if (predicate == null && @object == null)
+                    // Wissen dass Objekt und Prädikat null sind, also müssen wir nur nach Subjekten Filtern.
+                    return this.tripleGraph.SelectTriplesBySubject(new RDFResource($"{this.uriPrefix}:{subject}"));
 
-            if (!result.Success)
-                return Array.Empty<Triple>();
+                // Wenn wir zu dieser rein kommen wissen wir, dass MINDESTENS eines nicht null ist, entweder Prädikat
+                // oder Objekt. 
+                else if (predicate != null && @object == null)
+                    return this.tripleGraph.SelectTriplesBySubject(new RDFResource($"{this.uriPrefix}:{subject}"))
+                        .SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{predicate}"));
+                else
+                    return this.tripleGraph.SelectTriplesBySubject(new RDFResource($"{this.uriPrefix}:{subject}"))
+                        .SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{@object}"));
+            }
+            if (predicate != null)
+            {
+                // Wir wissen dass Subjekt sicher null ist.
+                // Wir wissen dass predicate NICHT null ist, gilt nurnoch herauszufinden
+                // ob object einen Filter hat oder nicht.
+                var result = @object == null
+                    ?
+                    this.tripleGraph.SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{predicate}")) 
+                    :
+                    this.tripleGraph.SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{predicate}"))
+                    .SelectTriplesByObject(new RDFResource($"{this.uriPrefix}:{@object}"));
 
-            return result.Data;
+                return result;
+            }
+            if (@object != null)
+            {
+                // Wir wissen dass Sowohl Subjekt als auch Prädikat sicher Null sind.
+                return this.tripleGraph.SelectTriplesByObject(new RDFResource($"{this.uriPrefix}:{@object}"));
+            }
+            else
+                // Hier wissen wir dass alle drei Bedingungen NULL sind.
+                return this.tripleGraph;
         }
     }
 }
