@@ -1,4 +1,5 @@
-﻿//-----------------------------------------------------------------------
+﻿using System.Linq;
+//-----------------------------------------------------------------------
 // <copyright file="CSVDataReader.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
@@ -12,6 +13,7 @@ namespace RDFTutorialLogic
     using System.Collections.Generic;
     using RDFTutorialLogic.Data;
     using System.Text;
+    using System;
 
     /// <summary>
     /// Represents an implementation of an <see cref="IDataReader"/> which is responsible for reading in data from a csv files.
@@ -54,9 +56,23 @@ namespace RDFTutorialLogic
             }
 
             this.fileReaderEngine.HeaderText = this.fileReaderEngine.GetFileHeader();
-
             return this.fileReaderEngine.ReadFile(path);
         }
 
+        /// <summary>
+        /// Reads in data from multiple csv files.
+        /// </summary>
+        /// <param name="paths">The paths to the files.</param>
+        /// <returns>An enumerable of raw triples.</returns>
+        public IEnumerable<IEnumerable<RawTripleData>> ReadFiles(params string[] paths)
+        {
+            if(paths == null)
+            {
+                throw new ArgumentNullException(nameof(paths));
+            }
+
+            return from path in paths
+                   select this.Read(path);
+        }
     }
 }

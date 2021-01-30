@@ -20,5 +20,12 @@ namespace RDFTutorialLogic.Interfaces
         /// <param name="path">The path to the file.</param>
         /// <returns>A collection of raw triple data which will be processed further.</returns>
         IEnumerable<RawTripleData> Read(string path);
+
+        /// <summary>
+        /// Reads in data from multiple files.
+        /// </summary>
+        /// <param name="paths">The paths to the files.</param>
+        /// <returns>An enumerable of raw triples.</returns>
+        public IEnumerable<IEnumerable<RawTripleData>> ReadFiles(params string[] paths);
     }
 }
