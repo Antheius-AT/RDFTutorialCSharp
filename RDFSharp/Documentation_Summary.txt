@@ -58,3 +58,15 @@ Triple 1 = Tom; ist; ein Mensch;
 Triple 2 = Mensch; hat; Füße;
 Triple 3 (Reasoner inferenziert) = Tom; hat; Füße;
 
+Beispiel 2 für Inferenz:
+Reflexive Prädikate. Beispiel: Ist verheiratet mit.
+
+Beispiel für 3 inferenz:
+
+Dependency Properties. 
+Elsa gehört Irina
+Gregor ist zusammen mit Irina
+
+Dependency Property --> Ist zusammen auf gehört => ist zusammen => gehört => Elsa gehört Gregor.
+Dependencies gehen nur bei Prädikaten.
+Sie sind Unidirektional.

@@ -81,7 +81,8 @@ namespace RDFTutorialLogic.BusinessLogic
 
             }
 
-            return inferredTriples;
+            tripleResult.AddRange(inferredTriples);
+            return tripleResult.Distinct();
         }
     }
 }

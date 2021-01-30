@@ -1,17 +1,7 @@
 ﻿Subject, Predicate, Object 
 Gregor,ist,Mensch
-Tom,ist,Mensch
 Elsa,ist,Hund
-Pfanne,ist,Gerät
-Woltron,ist,Mensch
-Mensch,hat,Geld
-Mensch,ist,schwul
-Mt Everest,ist,Berg
-Schneeberg,ist,Berg
+Hund,ist,süß
+Hund,ist,Säugetier
 Mensch,ist,Säugetier
-Berg,liegt in,Österreich
-Berg,ist,hoch
-Woltron,ist Sohn von,Vater von Woltron
-Vater von Woltron,ist Sohn von,Mister X
-Mensch,ist,geil
-Berg,ist bedeckt mit,Schnee
+Mensch,ist,dumm
