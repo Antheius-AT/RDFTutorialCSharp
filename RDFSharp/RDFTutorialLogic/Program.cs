@@ -60,6 +60,7 @@ namespace RDFTutorialLogic
             //Console.ReadKey(true);
 
             var reader = new CSVDataReader();
+         
         }
     }
 }
