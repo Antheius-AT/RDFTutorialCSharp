@@ -24,3 +24,14 @@ Ein Graph implementiert einen IEnumerator.
 Grph.TriplesCount gibt die Anzahl an Triples zurück.
 
 Schaut so aus als könnte der Graph unser TripleStore sein.
+
+### Import von Triples aus CSV-Files 
+
+Dieses Kapitel beschäftigt sich mit dem Import von Triples aus CSV Dateien. 
+Die relevante Komponente dafür ist der CSVDataReader. Dieser liest mit Hilfe des angegebenen Pfads, zur CSV-Datei, die Daten der Triple ein.
+Die Methodensignatur für das einlesen der Daten schaut, wie folgt, aus:
+
+```public IEnumerable<RawTripleData> Read(string path)```
+
+Hier bekommen wir in Form eines Enumberable unsere Raw Triples zurück die dann in eine Ontologie integriert werden können. Doch davor werden diese an den sogenannten
+Triple parser übergeben. Dieser validiert die Mindestanforderungen/ Contraints für ein Raw Triple. 
