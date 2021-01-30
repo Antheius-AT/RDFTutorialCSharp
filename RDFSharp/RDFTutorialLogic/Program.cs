@@ -60,7 +60,34 @@ namespace RDFTutorialLogic
             //Console.ReadKey(true);
 
             var reader = new CSVDataReader();
-         
+            var parser = new TripleParser("RDFDemoLibrary"); 
+            var data = reader.ReadFiles(@"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test.csv", @"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test2.csv");
+            var tripleStore = new TripleStore("RDFDemoLibrary");
+
+            foreach (var file in data)
+            {
+                foreach (var item in file)
+                {
+                    try
+                    {
+                        var triple = parser.Parse(item);
+                        tripleStore.TryAddTriple(triple);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Du bist ein Volltrottel.");
+                    }
+                }
+            }
+
+            var result = tripleStore.RetrieveMatchingTriplesAsync("Woltron", "istfwef", null);
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString().Replace("rdfdemolibrary:", string.Empty));
+            }
+
+            Console.ReadKey(true);
         }
     }
 }
