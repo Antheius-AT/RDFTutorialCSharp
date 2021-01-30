@@ -41,3 +41,20 @@ Die Methodensignatur für das einlesen der Daten schaut, wie folgt, aus:
 
 Hier bekommen wir in Form eines Enumberable unsere Raw Triples zurück die dann in eine Ontologie integriert werden können. Doch davor werden diese an den sogenannten
 Triple parser übergeben. Dieser validiert die Mindestanforderungen/ Contraints für ein Raw Triple. 
+
+
+INFERENZREGELN:
+Wenn das Objekt eines Triples irgendwo das Subjekt eines anderen Triples ist, dann hängen die beiden zusammen.
+Beduetet, dass der REasoner einen Neuen Triple generieren kann, mit dem ursprünglichen Subjekt, sowie dem Prädikat und Objekt des zweiten Triples.
+S1 P1 O1
+S2 = O1 P2 O2
+
+Es ergibt sich:
+S1 P2 O2
+
+Beispiel mit Wörtern:
+
+Triple 1 = Tom; ist; ein Mensch;
+Triple 2 = Mensch; hat; Füße;
+Triple 3 (Reasoner inferenziert) = Tom; hat; Füße;
+
