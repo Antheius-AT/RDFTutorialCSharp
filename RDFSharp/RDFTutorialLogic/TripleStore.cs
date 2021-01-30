@@ -8,8 +8,6 @@ namespace RDFTutorialLogic
 {
     using System;
     using System.Collections.Generic;
-    using RDFTutorialLogic.Data;
-    using RDFTutorialLogic.Interfaces;
     using RDFSharp.Model;
 
     /// <summary>

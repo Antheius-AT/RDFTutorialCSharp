@@ -4,9 +4,11 @@ namespace RDFTutorialLogic
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using FileHelpers;
     using RDFSharp.Model;
     using RDFSharp.Store;
+    using RDFTutorialLogic.BusinessLogic;
     using RDFTutorialLogic.Data;
 
     /// <summary>
@@ -60,13 +62,12 @@ namespace RDFTutorialLogic
             //Console.ReadKey(true);
 
             var reader = new CSVDataReader();
-            var parser = new TripleParser("RDFDemoLibrary"); 
-            var data = reader.ReadFiles(@"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test.csv", @"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test2.csv");
+            var parser = new TripleParser("RDFDemoLibrary");
+            var data = reader.Read(@"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test2.csv");
+            //var data = reader.ReadFiles(@"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test.csv", @"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test2.csv");
             var tripleStore = new TripleStore("RDFDemoLibrary");
 
-            foreach (var file in data)
-            {
-                foreach (var item in file)
+                foreach (var item in data)
                 {
                     try
                     {
@@ -78,11 +79,19 @@ namespace RDFTutorialLogic
                         Console.WriteLine("Du bist ein Volltrottel.");
                     }
                 }
-            }
+           
 
-            var result = tripleStore.RetrieveMatchingTriplesAsync("Woltron", "istfwef", null);
+            var result = tripleStore.RetrieveMatchingTriplesAsync(null, null, null);
 
-            foreach (var item in result)
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item.ToString().Replace("rdfdemolibrary:", string.Empty));
+            //}
+
+            var rule = new TransitiveDependencyRule();
+            var test = rule.Invoke(result);
+
+            foreach (var item in test)
             {
                 Console.WriteLine(item.ToString().Replace("rdfdemolibrary:", string.Empty));
             }

@@ -11,4 +11,8 @@
     <PackageReference Include="RDFSharp" Version="2.19.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RuleData\" />
+  </ItemGroup>
+
 </Project>
