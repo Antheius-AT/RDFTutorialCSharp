@@ -30,10 +30,7 @@ namespace RDFTutorialLogic
         /// </summary>
         public Reasoner()
         {
-            this.rules = new List<IInferencingRule>
-            {
-                new TransitiveDependencyRule()
-            };
+            this.rules = new List<IInferencingRule>();
         }
 
         /// <summary>
