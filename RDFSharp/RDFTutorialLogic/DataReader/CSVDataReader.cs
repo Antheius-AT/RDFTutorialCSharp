@@ -64,15 +64,26 @@ namespace RDFTutorialLogic
         /// </summary>
         /// <param name="paths">The paths to the files.</param>
         /// <returns>An enumerable of raw triples.</returns>
-        public IEnumerable<IEnumerable<RawTripleData>> ReadFiles(params string[] paths)
+        public IEnumerable<RawTripleData> ReadFiles(params string[] paths)
         {
             if(paths == null)
             {
                 throw new ArgumentNullException(nameof(paths));
             }
 
-            return from path in paths
-                   select this.Read(path);
+            var triples = new List<RawTripleData>();
+
+            foreach (var path in paths)
+            {
+                var currData = this.Read(path);
+                currData.ToList().ForEach(triple =>
+                {
+                    if (!triples.Contains(triple))
+                        triples.Add(triple);
+                });
+            } 
+
+            return triples;
         }
     }
 }
