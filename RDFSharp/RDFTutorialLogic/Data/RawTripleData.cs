@@ -7,6 +7,7 @@
 namespace RDFTutorialLogic.Data
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using FileHelpers;
 
     /// <summary>
@@ -16,7 +17,7 @@ namespace RDFTutorialLogic.Data
     [DelimitedRecord(",")]
     [IgnoreFirst]
     [IgnoreEmptyLines]
-    public class RawTripleData
+    public class RawTripleData : IEquatable<RawTripleData>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RawTripleData"/> class.
@@ -70,6 +71,11 @@ namespace RDFTutorialLogic.Data
         public override string ToString()
         {
             return $"{this.Subject} {this.Predicate} {this.Object}";
+        }
+
+        public bool Equals([AllowNull] RawTripleData other)
+        {
+            return this.Subject == other.Subject && this.Predicate == other.Predicate && this.Object == other.Object;
         }
     }
 }
