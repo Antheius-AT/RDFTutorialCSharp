@@ -22,78 +22,40 @@ namespace RDFTutorialLogic
         /// <param name="args"></param>
         public static void Main()
         {
-            //var data = new List<string>() { "Berg", "istHoch", "Martin" };
-            //var tripleParser = new TripleParser();
-            //var triple = tripleParser.Parse(new RawTripleData(data));
-
-            //var dataReader = new CSVDataReader();
-            //var data = dataReader.Read(@"E:\Test.csv");
-
-            //foreach (var item in data)
-            //    Console.WriteLine(item);
-
-            //var uri = new Uri("design.html", UriKind.RelativeOrAbsolute);
-
-            //var res = new RDFResource("RDFDemoLibrary:Test");
-            //var triple = new RDFTriple(res, res, res);
-
-            //var graph = new RDFGraph();
-            //graph.AddTriple(triple);
-
-            //Console.WriteLine($"Contains Triple: {graph.ContainsTriple(triple)}");
-
-            //var sameTriple = new RDFTriple(res, res, res);
-
-            //Console.WriteLine($"Contains same triple but other reference: {graph.ContainsTriple(sameTriple)}");
-
-            //graph.RemoveTriple(new RDFTriple(res, res, new RDFResource()));
-
-            //graph.AddTriple(new RDFTriple(null, res, lit:null));
-
-            //foreach (var item in graph)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            //var testtest = graph.SelectTriplesBySubject(new RDFResource());
-            //var anothertesttest = graph.SelectTriplesBySubject(new RDFResource("RDFDemoLibrary:Test"));
-            //var lastTest = graph.SelectTriplesBySubject(res);
-
-            //Console.ReadKey(true);
-
+            var uriPrefix = "RDFDemoLibrary";
             var reader = new CSVDataReader();
-            var parser = new TripleParser("RDFDemoLibrary");
+            var parser = new TripleParser(uriPrefix);
             var data = reader.Read(@"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test2.csv");
-            //var data = reader.ReadFiles(@"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test.csv", @"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test2.csv");
-            var tripleStore = new TripleStore("RDFDemoLibrary");
+            var tripleStore = new TripleStore(uriPrefix);
+            var reasoner = new Reasoner();
+            reasoner.RegisterRule(new InverseDependencyRule("Ist beFReundet mit", uriPrefix));
 
-                foreach (var item in data)
-                {
-                    try
-                    {
-                        var triple = parser.Parse(item);
-                        tripleStore.TryAddTriple(triple);
-                    }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("Du bist ein Volltrottel.");
-                    }
-                }
-           
+            var triples = tripleStore.RetrieveMatchingTriplesAsync(null, null, null);
 
-            var result = tripleStore.RetrieveMatchingTriplesAsync(null, null, null);
-
-            //foreach (var item in result)
-            //{
-            //    Console.WriteLine(item.ToString().Replace("rdfdemolibrary:", string.Empty));
-            //}
-
-            var rule = new TransitiveDependencyRule();
-            var test = rule.Invoke(result);
-
-            foreach (var item in test)
+            foreach (var item in data)
             {
-                Console.WriteLine(item.ToString().Replace("rdfdemolibrary:", string.Empty));
+                try
+                {
+                    var triple = parser.Parse(item);
+                    tripleStore.TryAddTriple(triple);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Du bist ein Volltrottel.");
+                }
+            }
+
+            foreach (var item in triples)
+            {
+                Console.WriteLine(item.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
+            }
+
+            Console.WriteLine("------------------------------------------------------------");
+            var reasoned = reasoner.InvokeRules(triples);
+
+            foreach (var item in reasoned)
+            {
+                Console.WriteLine(item.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
             }
 
             Console.ReadKey(true);

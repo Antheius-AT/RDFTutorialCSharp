@@ -9,6 +9,7 @@ namespace RDFTutorialLogic.Interfaces
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using RDFSharp.Model;
     using RDFTutorialLogic.Data;
 
     /// <summary>
@@ -26,7 +27,7 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        Task<DatabaseQuerySuccessResult> TryStoreInDatabaseAsync(Triple triple);
+        Task<DatabaseQuerySuccessResult> TryStoreInDatabaseAsync(RDFTriple triple);
 
         /// <summary>
         /// Asynchronously retrieves all triples from the database matching 
@@ -43,7 +44,7 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="ArgumentException">
         /// Is thrown if either of the parameters are an empty string.
         /// </exception>
-        Task<DatabaseQueryDataResult<IEnumerable<Triple>>> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object);
+        Task<DatabaseQueryDataResult<IEnumerable<RDFTriple>>> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object);
 
         /// <summary>
         /// Asynchronously tries to delete the specified triple.
@@ -56,6 +57,6 @@ namespace RDFTutorialLogic.Interfaces
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        Task<DatabaseQuerySuccessResult> TryDeleteFromDatabaseAsync(Triple triple);
+        Task<DatabaseQuerySuccessResult> TryDeleteFromDatabaseAsync(RDFTriple triple);
     }
 }

@@ -41,7 +41,7 @@ namespace RDFTutorialLogic.Data
         }
 
         /// <summary>
-        /// Parses raw triple data into a <see cref="Triple"/> object.
+        /// Parses raw triple data into a <see cref="EnhancedRDFTriple"/> object.
         /// </summary>
         /// <param name="data">An <see cref="RawTripleData"/> object representing the raw, unparsed triple data.</param>
         /// <returns>The parsed triple.</returns>

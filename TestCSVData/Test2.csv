@@ -1,7 +1,5 @@
 ﻿Subject, Predicate, Object 
-Gregor,ist,Mensch
-Elsa,ist,Hund
-Hund,ist,süß
-Hund,ist,Säugetier
-Mensch,ist,Säugetier
-Mensch,ist,dumm
+Gregor,ist befreundet mit,Irina
+Gregor,ist befreundet mit,Elsa
+Martin,ist befreundet mit,Markus
+Hugo,ist befreundet mit,Günther
