@@ -70,3 +70,19 @@ Gregor ist zusammen mit Irina
 Dependency Property --> Ist zusammen auf gehört => ist zusammen => gehört => Elsa gehört Gregor.
 Dependencies gehen nur bei Prädikaten.
 Sie sind Unidirektional.
+
+
+// Case: 
+            // Elsa gehört Irina => gehört ist bezogen auf Irina => bezogen auf auf Objekt
+            // Gregor ist zusammen mit Irina. => zusammen mit bezogen auf Gregor 
+            // ist zusammen ist gemapped auf gehört: ist zusammen => gehört
+            // => PredicateRule(basePredicate: ist zusammen, mappedPredicate: gehört)
+            // Result = Elsa gehört Gregor.
+
+            // Das Haus gehört Irina
+
+            // 1.Irina hat Schulden bei Gregor.
+
+            // 2.Gregor hat Schulden bei Irina.tur
+            // schuldet Geld ist gemapped auf gehört: schuldet Geld => gehört
+            // => PredicateRule(basePredicate: ist zusammen, mappedPredicate: gehört)
