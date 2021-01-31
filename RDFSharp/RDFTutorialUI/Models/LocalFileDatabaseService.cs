@@ -28,7 +28,7 @@ namespace RDFTutorialUI.Models
         /// <summary>
         /// Represents an object capable of writing and reading CSV files.
         /// </summary>
-        private FileHelperEngine<Triple> fileHelper;
+        private FileHelperEngine<EnhancedRDFTriple> fileHelper;
 
         /// <summary>
         /// Object capable of reading and writing to files on disk.
@@ -47,7 +47,7 @@ namespace RDFTutorialUI.Models
         /// </exception>
         public LocalFileDatabaseService(string filePath, IDataReader dataReader)
         {
-            this.fileHelper = new FileHelperEngine<Triple>();
+            this.fileHelper = new FileHelperEngine<EnhancedRDFTriple>();
             this.FilePath = filePath;
             this.dataReader = dataReader ?? throw new ArgumentNullException(nameof(dataReader), "Data Reader must not be null.");
         }
@@ -87,7 +87,7 @@ namespace RDFTutorialUI.Models
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        public async Task<DatabaseQuerySuccessResult> TryDeleteFromDatabaseAsync(Triple triple)
+        public async Task<DatabaseQuerySuccessResult> TryDeleteFromDatabaseAsync(EnhancedRDFTriple triple)
         {
             throw new NotImplementedException();
         }
@@ -107,7 +107,7 @@ namespace RDFTutorialUI.Models
         /// <exception cref="ArgumentException">
         /// Is thrown if either of the parameters are an empty string.
         /// </exception>
-        public async Task<DatabaseQueryDataResult<IEnumerable<Triple>>> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object)
+        public async Task<DatabaseQueryDataResult<IEnumerable<EnhancedRDFTriple>>> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object)
         {
             throw new NotImplementedException();
         }
@@ -122,7 +122,7 @@ namespace RDFTutorialUI.Models
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        public async Task<DatabaseQuerySuccessResult> TryStoreInDatabaseAsync(Triple triple)
+        public async Task<DatabaseQuerySuccessResult> TryStoreInDatabaseAsync(EnhancedRDFTriple triple)
         {
             throw new NotImplementedException();
         }

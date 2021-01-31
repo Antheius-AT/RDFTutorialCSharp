@@ -10,7 +10,6 @@ namespace RDFTutorialLogic.BusinessLogic
     using System.Collections.Generic;
     using System.Linq;
     using RDFSharp.Model;
-    using RDFTutorialLogic.Data;
     using RDFTutorialLogic.Interfaces;
 
     /// <summary>
@@ -19,6 +18,22 @@ namespace RDFTutorialLogic.BusinessLogic
     /// </summary>
     public class TransitiveDependencyRule : IInferencingRule
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransitiveDependencyRule"/> class.
+        /// </summary>
+        public TransitiveDependencyRule()
+        {
+            this.IsDependencyRule = false;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this rule is a dependency rule.
+        /// </summary>
+        public bool IsDependencyRule
+        {
+            get;
+        }
+
         /// <summary>
         /// Invokes the specified rule.
         /// </summary>

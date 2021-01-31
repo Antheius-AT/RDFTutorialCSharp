@@ -12,7 +12,7 @@ namespace RDFTutorialLogic.Exceptions
 
     /// <summary>
     /// Represents an exception that is thrown if the parsing of <see cref="RawTripleData"/> 
-    /// into a <see cref="Triple"/> object was not successful.
+    /// into a <see cref="EnhancedRDFTriple"/> object was not successful.
     /// </summary>
     public class TripleParsingFailedException : Exception
     {

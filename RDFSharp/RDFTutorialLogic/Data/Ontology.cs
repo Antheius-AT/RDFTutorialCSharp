@@ -8,6 +8,7 @@ namespace RDFTutorialLogic.Data
 {
     using System;
     using System.Collections.Generic;
+    using RDFSharp.Model;
 
     /// <summary>
     /// Represents the component which stores and manage data of triples.
@@ -17,7 +18,7 @@ namespace RDFTutorialLogic.Data
         /// <summary>
         /// All the triples currently stored in the ontology.
         /// </summary>
-        private readonly IEnumerable<Triple> tripleData;
+        private readonly IEnumerable<RDFTriple> tripleData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ontology"/> class.
@@ -29,7 +30,7 @@ namespace RDFTutorialLogic.Data
         public Ontology(string name)
         {
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
-            this.tripleData = new List<Triple>();
+            this.tripleData = new List<RDFTriple>();
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace RDFTutorialLogic.Data
         /// Retrieve all triples from the ontology.
         /// </summary>
         /// <returns>A enumerable of the triples.</returns>
-        public IEnumerable<Triple> RetrieveAll()
+        public IEnumerable<RDFTriple> RetrieveAll()
         {
             foreach (var triple in this.tripleData)
             {
