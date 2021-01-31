@@ -50,6 +50,8 @@ namespace RDFTutorialLogic.Data
             {
                 yield return triple;
             }
+
+            
         }
     }
 }
