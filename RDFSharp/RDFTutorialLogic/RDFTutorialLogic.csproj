@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DataWriter\" />
     <Folder Include="RuleData\" />
   </ItemGroup>
 
