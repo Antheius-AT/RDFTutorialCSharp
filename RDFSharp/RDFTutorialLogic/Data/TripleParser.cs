@@ -81,7 +81,7 @@ namespace RDFTutorialLogic.Data
         /// <param name="subject">The subject of the raw triple.</param>
         /// <param name="predicate">The predicate of the raw triple.</param>
         /// <param name="object">The object of the raw triple.</param>
-        /// <returns></returns>
+        /// <returns>True if the triple fullfil the constraints.</returns>
         private bool ValidateRawTripleConstraints(string subject, string predicate, string @object)
         {
             if(string.IsNullOrWhiteSpace(subject) && string.IsNullOrWhiteSpace(predicate) && string.IsNullOrWhiteSpace(@object))
