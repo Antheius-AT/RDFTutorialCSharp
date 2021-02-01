@@ -53,8 +53,8 @@ namespace RDFTutorialLogic.BusinessLogic
         /// </exception>
         public TransitiveDependencyRule(string basePredicate, string mappedPredicate, bool basePredicateIsRelatedToSubject, bool mappedPredicateIsRelatedToSubject, string prefix)
         {
-            this.basePredicate = $"{prefix}:basePredicate" ?? throw new ArgumentNullException(nameof(basePredicate));
-            this.mappedPredicate = $"{prefix}:mappedPredicate" ?? throw new ArgumentNullException(nameof(mappedPredicate));
+            this.basePredicate = basePredicate ?? throw new ArgumentNullException(nameof(basePredicate));
+            this.mappedPredicate = mappedPredicate ?? throw new ArgumentNullException(nameof(mappedPredicate));
             this.basePredicateIsRelatedToSubject = basePredicateIsRelatedToSubject;
             this.mappedPredicateIsRelatedToSubject = mappedPredicateIsRelatedToSubject;
             this.prefix = prefix;
