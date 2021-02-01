@@ -4,14 +4,12 @@
 // </copyright>
 // <author>Gregor Faiman</author>
 //-----------------------------------------------------------------------
-using RDFTutorialLogic.Interfaces;
-
 namespace RDFTutorialLogic.Data
 {
     using System;
-    using System.Linq;
     using RDFSharp.Model;
     using RDFTutorialLogic.Exceptions;
+    using RDFTutorialLogic.Interfaces;
 
     /// <summary>
     /// Represent an object capable of parsing triples from raw triple data.

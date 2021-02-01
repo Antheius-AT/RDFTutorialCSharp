@@ -73,6 +73,11 @@ namespace RDFTutorialLogic.Data
             return $"{this.Subject} {this.Predicate} {this.Object}";
         }
 
+        /// <summary>
+        /// Determines whether two instances of <see cref="RawTripleData"/> are equal to another.
+        /// </summary>
+        /// <param name="other">The data to compare this instance to.</param>
+        /// <returns>Whether or not the objects are equal.</returns>
         public bool Equals([AllowNull] RawTripleData other)
         {
             return this.Subject == other.Subject && this.Predicate == other.Predicate && this.Object == other.Object;
