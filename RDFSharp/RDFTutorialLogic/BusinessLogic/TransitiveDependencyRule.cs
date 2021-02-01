@@ -45,15 +45,16 @@ namespace RDFTutorialLogic.BusinessLogic
         /// </summary>
         /// <param name="basePredicate">The base predicate from which the connection emanates.</param>
         /// <param name="mappedPredicate">The predicate which is mapped in an unidiretional way to the base predicate.</param>
-        /// <param name="basePredicateIsRelatedToSubject">Determine whether the </param>
+        /// <param name="basePredicateIsRelatedToSubject">Determines whether the base predicate is related to the subject.</param>
+        /// <param name="mappedPredicateIsRelatedToSubject">Determines whether the mapped predicate is related to the subject.</param>
         /// <param name="prefix">The prefix of a triple.</param>
         /// <exception cref="ArgumentNullException">
         /// Is thrown if the base predicate or the mapped predicate is null.
         /// </exception>
         public TransitiveDependencyRule(string basePredicate, string mappedPredicate, bool basePredicateIsRelatedToSubject, bool mappedPredicateIsRelatedToSubject, string prefix)
         {
-            this.basePredicate = basePredicate ?? throw new ArgumentNullException(nameof(basePredicate));
-            this.mappedPredicate = mappedPredicate ?? throw new ArgumentNullException(nameof(mappedPredicate));
+            this.basePredicate = $"{prefix}:basePredicate" ?? throw new ArgumentNullException(nameof(basePredicate));
+            this.mappedPredicate = $"{prefix}:mappedPredicate" ?? throw new ArgumentNullException(nameof(mappedPredicate));
             this.basePredicateIsRelatedToSubject = basePredicateIsRelatedToSubject;
             this.mappedPredicateIsRelatedToSubject = mappedPredicateIsRelatedToSubject;
             this.prefix = prefix;
@@ -77,10 +78,7 @@ namespace RDFTutorialLogic.BusinessLogic
             // Result = Elsa gehört Gregor.
 
             // Das Haus gehört Irina
-
-            // 1.Irina hat Schulden bei Gregor.
-
-            // 2.Gregor hat Schulden bei Irina.
+            // Irina hat Schulden bei Gregor.
             // schuldet Geld ist gemapped auf gehört: schuldet Geld => gehört
             // => PredicateRule(basePredicate: ist zusammen, mappedPredicate: gehört)
             // Result = Elsa gehört Gregor.

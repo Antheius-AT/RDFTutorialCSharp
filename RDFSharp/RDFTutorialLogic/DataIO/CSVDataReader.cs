@@ -3,7 +3,7 @@
 // <copyright file="CSVDataReader.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
-// <author>Tom Pirich</author>
+// <author>Gregor Faiman, Tom Pirich</author>
 //-----------------------------------------------------------------------
 namespace RDFTutorialLogic
 {
