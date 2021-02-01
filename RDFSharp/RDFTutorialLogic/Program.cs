@@ -57,34 +57,61 @@ namespace RDFTutorialLogic
             //{
             //    Console.WriteLine(item.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
             //}
-            var predRule1 = new TransitiveDependencyRule(
-                $"{uriPrefix.ToLower()}:ist zusammen mit", 
-                $"{uriPrefix.ToLower()}:gehört",
-                basePredicateIsRelatedToSubject: false,
-                mappedPredicateIsRelatedToSubject: false,
-                uriPrefix);
+            //var predRule1 = new TransitiveDependencyRule(
+            //    $"{uriPrefix.ToLower()}:ist zusammen mit", 
+            //    $"{uriPrefix.ToLower()}:gehört",
+            //    basePredicateIsRelatedToSubject: false,
+            //    mappedPredicateIsRelatedToSubject: false,
+            //    uriPrefix);
 
-            var predRule2 = new TransitiveDependencyRule(
-                $"{uriPrefix.ToLower()}:hat Schulden bei",
-                $"{uriPrefix.ToLower()}:gehört",
-                basePredicateIsRelatedToSubject: true,
-                mappedPredicateIsRelatedToSubject: false,
-                uriPrefix);
+            //var predRule2 = new TransitiveDependencyRule(
+            //    $"{uriPrefix.ToLower()}:hat Schulden bei",
+            //    $"{uriPrefix.ToLower()}:gehört",
+            //    basePredicateIsRelatedToSubject: true,
+            //    mappedPredicateIsRelatedToSubject: false,
+            //    uriPrefix);
 
-            var predRule3 = new TransitiveDependencyRule(
-                $"{uriPrefix.ToLower()}:ist",
-                $"{uriPrefix.ToLower()}:hat",
-                basePredicateIsRelatedToSubject: false,
-                mappedPredicateIsRelatedToSubject: true,
-                uriPrefix);
+            //var predRule3 = new TransitiveDependencyRule(
+            //    $"{uriPrefix.ToLower()}:ist",
+            //    $"{uriPrefix.ToLower()}:hat",
+            //    basePredicateIsRelatedToSubject: false,
+            //    mappedPredicateIsRelatedToSubject: true,
+            //    uriPrefix);
 
 
-            reasoner.RegisterRule(predRule1);
-            reasoner.RegisterRule(predRule2);
-            reasoner.RegisterRule(predRule3);
-            var rawData = reader.ReadFiles(
-                @"E:\VisualStudio\Visual C#\RDFTutorialCSharp\TestCSVData\Test2.csv");
+            //reasoner.RegisterRule(predRule1);
+            //reasoner.RegisterRule(predRule2);
+            //reasoner.RegisterRule(predRule3);
+            //var rawData = reader.ReadFiles(
+            //    @"E:\VisualStudio\Visual C#\RDFTutorialCSharp\TestCSVData\Test2.csv");
+            //var tripleData = new List<RDFTriple>();
+
+
+            //Console.WriteLine("Starting data:");
+            //foreach (var triple in tripleData)
+            //{
+            //    Console.WriteLine(triple.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
+            //}
+            //Console.WriteLine("-----------------------");
+
+            //Console.WriteLine("Rules:");
+
+            //Console.WriteLine("Predicate rule 1: ist zusammen mit => gehört");
+            //Console.WriteLine("Predicate rule 1: hat Schulden bei => gehört");
+
+            //Console.WriteLine("-----------------------");
+            //Console.WriteLine("Inferred data:");
+            //tripleData = reasoner.InvokeRules(tripleData).ToList();
+            //foreach (var triple in tripleData.Distinct())
+            //{
+            //    Console.WriteLine(triple.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
+            //}
+            var path = @"E:\VisualStudio\Visual C#\RDFTutorialCSharp\TestCSVData\Test1.csv";
+            var outputPath = @"E:\VisualStudio\Visual C#\RDFTutorialCSharp\TestCSVData\Test10.csv";
+            //var path = @"E:\VisualStudio\Visual C#\RDFTutorialCSharp\TestCSVData\Test3.csv";
+            var rawData = reader.Read(path);
             var tripleData = new List<RDFTriple>();
+
             foreach (var rawTripleData in rawData)
             {
                 try
@@ -94,29 +121,13 @@ namespace RDFTutorialLogic
                 catch (Exception)
                 {
                 }
-               
+
             }
 
+            var ontology = new Ontology("Test", tripleData);
+            var writer = new CSVDataWriter();
 
-            Console.WriteLine("Starting data:");
-            foreach (var triple in tripleData)
-            {
-                Console.WriteLine(triple.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
-            }
-            Console.WriteLine("-----------------------");
-
-            Console.WriteLine("Rules:");
-
-            Console.WriteLine("Predicate rule 1: ist zusammen mit => gehört");
-            Console.WriteLine("Predicate rule 1: hat Schulden bei => gehört");
-
-            Console.WriteLine("-----------------------");
-            Console.WriteLine("Inferred data:");
-            tripleData = reasoner.InvokeRules(tripleData).ToList();
-            foreach (var triple in tripleData.Distinct())
-            {
-                Console.WriteLine(triple.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
-            }
+            writer.Write(ontology, outputPath);
 
             Console.ReadKey(true);
         }
