@@ -1,7 +1,7 @@
-﻿Subject, Predicate, Object 
-Elsa,gehört,Irina
-Gregor,ist zusammen mit,Irina
-Irina,hat Schulden bei,Gregor
-Das Haus,gehört,Irina
-Mensch,hat,Geld
-Gregor,ist,Mensch
+Subject,Predicate,Object
+rdfdemolibrary:Elsa,rdfdemolibrary:gehört,rdfdemolibrary:Irina
+rdfdemolibrary:Gregor,rdfdemolibrary:ist zusammen mit,rdfdemolibrary:Irina
+rdfdemolibrary:Irina,rdfdemolibrary:hat Schulden bei,rdfdemolibrary:Gregor
+rdfdemolibrary:Das Haus,rdfdemolibrary:gehört,rdfdemolibrary:Irina
+rdfdemolibrary:Mensch,rdfdemolibrary:hat,rdfdemolibrary:Geld
+rdfdemolibrary:Gregor,rdfdemolibrary:ist,rdfdemolibrary:Mensch

@@ -6,7 +6,6 @@
 //-----------------------------------------------------------------------
 namespace RDFTutorialLogic.Interfaces
 {
-    using System.Collections.Generic;
     using RDFTutorialLogic.Data;
 
     /// <summary>
@@ -15,9 +14,10 @@ namespace RDFTutorialLogic.Interfaces
     public interface IDataWriter
     {
         /// <summary>
-        /// Writes 
+        /// Writes data from an ontology to a given csv file.
         /// </summary>
-        /// <param name="patha"></param>
+        /// <param name="ontolgy">The ontology whichs data is written to a file.</param>
+        /// <param name="path">The path to the file.</param>
         void Write(Ontology ontolgy, string path);
     }
 }
