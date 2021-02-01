@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ReflexiveDependencyRule.cs" company="FHWN">
+// <copyright file="InverseDependencyRule.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
 // <author>Gregor Faiman, Tom Pirich</author>

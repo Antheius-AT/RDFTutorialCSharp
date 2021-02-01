@@ -2,13 +2,14 @@
 // <copyright file="TripleStore.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
-// <author>Gregor Faiman</author>
+// <author>Gregor Faiman, Tom Pirich</author>
 //-----------------------------------------------------------------------
 namespace RDFTutorialLogic
 {
     using System;
     using System.Collections.Generic;
     using RDFSharp.Model;
+    using RDFTutorialLogic.Data;
 
     /// <summary>
     /// Represents a triple store, supporting the management of triples.
@@ -32,10 +33,20 @@ namespace RDFTutorialLogic
         /// <exception cref="ArgumentNullException">
         /// Is thrown if database service is null.
         /// </exception>
-        public TripleStore(string uriPrefix)
+        public TripleStore(string uriPrefix, Reasoner reasoner)
         {
             this.tripleGraph = new RDFGraph();
             this.uriPrefix = uriPrefix ?? throw new ArgumentNullException(nameof(uriPrefix), "URI prefix must not be null.");
+            this.Reasoner = reasoner ?? throw new ArgumentNullException(nameof(reasoner), "Reasoner must not be null.");
+        }
+
+        /// <summary>
+        /// Gets the reasoner used for inferring new triples.
+        /// </summary>
+        public Reasoner Reasoner
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -146,6 +157,15 @@ namespace RDFTutorialLogic
             else
                 // Hier wissen wir dass alle drei Bedingungen NULL sind.
                 return this.tripleGraph;
+        }
+
+        /// <summary>
+        /// Exports all of the available triples into a new ontology.
+        /// </summary>
+        /// <returns>The exported ontology containing all of the triples.</returns>
+        public Ontology ExportOntology()
+        {
+            return new Ontology($"{this.uriPrefix}Ontology", this.tripleGraph);
         }
     }
 }
