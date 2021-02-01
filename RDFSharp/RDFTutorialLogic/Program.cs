@@ -1,13 +1,15 @@
-﻿using System;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="FHWN">
+//     Copyright (c) FHWN. All rights reserved.
+// </copyright>
+// <author>Gregor Faiman, Tom Pirich</author>
+//-----------------------------------------------------------------------
 namespace RDFTutorialLogic
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
-    using FileHelpers;
     using RDFSharp.Model;
-    using RDFSharp.Store;
     using RDFTutorialLogic.BusinessLogic;
     using RDFTutorialLogic.Data;
 
@@ -25,38 +27,8 @@ namespace RDFTutorialLogic
             var uriPrefix = "RDFDemoLibrary";
             var reader = new CSVDataReader();
             var parser = new TripleParser(uriPrefix);
-            //var data = reader.Read(@"F:\FH_Stuff\3_Semester\SemantischeTechnologien\Aufgabenstellung\RDFTutorialCSharp\TestCSVData\Test2.csv");
-            //var tripleStore = new TripleStore(uriPrefix);
             var reasoner = new Reasoner();
-            //reasoner.RegisterRule(new InverseDependencyRule("Ist beFReundet mit", uriPrefix));
 
-            //var triples = tripleStore.RetrieveMatchingTriplesAsync(null, null, null);
-
-            //foreach (var item in data)
-            //{
-            //    try
-            //    {
-            //        var triple = parser.Parse(item);
-            //        tripleStore.TryAddTriple(triple);
-            //    }
-            //    catch (Exception)
-            //    {
-            //        Console.WriteLine("Du bist ein Volltrottel.");
-            //    }
-            //}
-
-            //foreach (var item in triples)
-            //{
-            //    Console.WriteLine(item.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
-            //}
-
-            //Console.WriteLine("------------------------------------------------------------");
-            //var reasoned = reasoner.InvokeRules(triples);
-
-            //foreach (var item in reasoned)
-            //{
-            //    Console.WriteLine(item.ToString().Replace($"{uriPrefix.ToLower()}:", string.Empty));
-            //}
             var predRule1 = new TransitiveDependencyRule(
                 $"{uriPrefix.ToLower()}:ist zusammen mit", 
                 $"{uriPrefix.ToLower()}:gehört",
@@ -77,7 +49,6 @@ namespace RDFTutorialLogic
                 basePredicateIsRelatedToSubject: false,
                 mappedPredicateIsRelatedToSubject: true,
                 uriPrefix);
-
 
             reasoner.RegisterRule(predRule1);
             reasoner.RegisterRule(predRule2);

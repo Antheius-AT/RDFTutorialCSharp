@@ -32,6 +32,7 @@ namespace RDFTutorialLogic
         /// <param name="databaseService">The service used for accessing the triple database.</param>
         /// <exception cref="ArgumentNullException">
         /// Is thrown if database service is null.
+        /// Is thrown if reasoner is null.
         /// </exception>
         public TripleStore(string uriPrefix, Reasoner reasoner)
         {
