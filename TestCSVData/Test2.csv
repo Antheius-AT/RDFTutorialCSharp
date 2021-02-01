@@ -1,7 +1,3 @@
 Subject,Predicate,Object
-rdfdemolibrary:Elsa,rdfdemolibrary:gehört,rdfdemolibrary:Irina
-rdfdemolibrary:Gregor,rdfdemolibrary:ist zusammen mit,rdfdemolibrary:Irina
-rdfdemolibrary:Irina,rdfdemolibrary:hat Schulden bei,rdfdemolibrary:Gregor
-rdfdemolibrary:Das Haus,rdfdemolibrary:gehört,rdfdemolibrary:Irina
-rdfdemolibrary:Mensch,rdfdemolibrary:hat,rdfdemolibrary:Geld
-rdfdemolibrary:Gregor,rdfdemolibrary:ist,rdfdemolibrary:Mensch
+Schneeberg,ist ein,Berg
+Zugspitze,ist ein,Berg

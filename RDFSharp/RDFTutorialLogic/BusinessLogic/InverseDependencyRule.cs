@@ -56,7 +56,7 @@ namespace RDFTutorialLogic.BusinessLogic
             for (int i = 0; i < triples.Count(); i++)
             {
                 var currentTriple = triples.ElementAt(i);
-                var predicateWithoutPrefix = currentTriple.Predicate.ToString().Replace("rdfdemolibrary:", string.Empty);
+                var predicateWithoutPrefix = currentTriple.Predicate.ToString().Replace($"{uriPrefix}:", string.Empty);
 
                 if (predicateWithoutPrefix == this.inversePredicate.ToLower())
                 {

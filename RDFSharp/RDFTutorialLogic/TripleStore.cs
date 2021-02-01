@@ -80,7 +80,7 @@ namespace RDFTutorialLogic
         /// <exception cref="ArgumentNullException">
         /// Is thrown if triple is null.
         /// </exception>
-        public bool TryDeleteTripleAsync(RDFTriple triple)
+        public bool TryDeleteTriple(RDFTriple triple)
         {
             if (triple == null)
                 throw new ArgumentNullException(nameof(triple), "Triple to delete must not be null.");
@@ -103,7 +103,7 @@ namespace RDFTutorialLogic
         /// <exception cref="ArgumentException">
         /// Is thrown if either of the parameters is an empty string.
         /// </exception>
-        public IEnumerable<RDFTriple> RetrieveMatchingTriplesAsync(string subject, string predicate, string @object)
+        public IEnumerable<RDFTriple> RetrieveMatchingTriples(string subject, string predicate, string @object)
         {
             if (subject == string.Empty)
                 throw new ArgumentException(nameof(subject), "Subject to look for must not be empty. Use null to omit a restriction for a specified parameter.");
@@ -130,9 +130,14 @@ namespace RDFTutorialLogic
                 // Wenn wir zu dieser rein kommen wissen wir, dass MINDESTENS eines nicht null ist, entweder Prädikat
                 // oder Objekt. 
                 else if (predicate != null && @object == null)
-                    return this.tripleGraph.SelectTriplesBySubject(new RDFResource($"{this.uriPrefix}:{subject}"))
-                        .SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{predicate}"));
-                else
+                {
+                    var selectedTriplesBySubject = this.tripleGraph.SelectTriplesBySubject(new RDFResource($"{this.uriPrefix}:{subject}"));
+                    var selectedTriplesByPredicate = selectedTriplesBySubject.SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{predicate}"));
+                    return selectedTriplesByPredicate;
+                }
+                //    return this.tripleGraph.SelectTriplesBySubject(new RDFResource($"{this.uriPrefix}:{subject}"))
+                //        .SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{predicate}"));
+                //else
                     return this.tripleGraph.SelectTriplesBySubject(new RDFResource($"{this.uriPrefix}:{subject}"))
                         .SelectTriplesByPredicate(new RDFResource($"{this.uriPrefix}:{@object}"));
             }

@@ -224,9 +224,9 @@ namespace RDFTutorialLogic.BusinessLogic
             if (baseTriple.Object.ToString() == mappedTriple.Object.ToString())
             {
                 var inferredTriple = new RDFTriple(
-                    new RDFResource(baseTriple.Subject.ToString()),
+                    new RDFResource(mappedTriple.Subject.ToString()),
                     new RDFResource(mappedTriple.Predicate.ToString()),
-                    new RDFResource(mappedTriple.Subject.ToString())
+                    new RDFResource(baseTriple.Subject.ToString())
                     );
 
                 inferredTriples.Add(inferredTriple);
