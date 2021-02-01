@@ -1,4 +1,10 @@
-﻿namespace RDFTutorialLogic.BusinessLogic
+﻿//-----------------------------------------------------------------------
+// <copyright file="ReflexiveDependencyRule.cs" company="FHWN">
+//     Copyright (c) FHWN. All rights reserved.
+// </copyright>
+// <author>Gregor Faiman, Tom Pirich</author>
+//-----------------------------------------------------------------------
+namespace RDFTutorialLogic.BusinessLogic
 {
     using System;
     using System.Collections.Generic;
@@ -25,7 +31,7 @@
         private readonly bool basePredicateIsRelatedToSubject;
 
         /// <summary>
-        /// A value indicating whether the 
+        /// A value indicating whether the mapped 
         /// </summary>
         private readonly bool mappedPredicateIsRelatedToSubject;
 
