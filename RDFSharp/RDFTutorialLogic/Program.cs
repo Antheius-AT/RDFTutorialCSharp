@@ -43,20 +43,20 @@ namespace RDFTutorialLogic
             var multiFileData = reader.ReadFiles(firstFilePath, secondFilePath);
 
             // Eingelesene Daten parsen
-            var parsedTriples = Parse(multiFileData);
+            var parsedTriples = Parse(singleFileData);
 
             // Daten zum Store hinzufügen
             AddTriplesToStore(parsedTriples);
             PrintAll(store.RetrieveMatchingTriples(null, null, null), "Alle hinzugefügten Triples im store:");
 
             // Daten vom Store löschen
-            store.TryDeleteTriple(parsedTriples.First());
-            store.TryDeleteTriple(parsedTriples.Last());
+            // store.TryDeleteTriple(parsedTriples.First());
+            // store.TryDeleteTriple(parsedTriples.Last());
 
             // Daten aus Store abrufen mit store.RetrieveMatchingTriples und anschließend ausgeben.
             PrintAll(store.RetrieveMatchingTriples(null, null, null), "Erster und letzter Triple gelöscht:");
             PrintAll(store.RetrieveMatchingTriples("Gregor", null, null), "Gefiltert nach Subjekt: Gregor");
-            PrintAll(store.RetrieveMatchingTriples("Tom", "ist", null), "Gefiltert nach Subjekt: Gregor; Prädikat: ist ein");
+            PrintAll(store.RetrieveMatchingTriples("Tom", "ist", null), "Gefiltert nach Subjekt: Tom; Prädikat: ist");
             PrintAll(store.RetrieveMatchingTriples(null, "hat", null), "Gefiltert nach Prädikat: hat");
             PrintAll(store.RetrieveMatchingTriples(null, null, "Durst"), "Gefiltert nach Objekt: Durst");
 
@@ -71,6 +71,7 @@ namespace RDFTutorialLogic
                 newStore.TryAddTriple(item);
             }
 
+            // x ist partner von y. ==> y ist partner von x.
             reasoner.RegisterRule(new InverseDependencyRule("ist partner von", uriPrefix));
             reasoner.RegisterRule(new InverseDependencyRule("ist zusammen mit", uriPrefix));
             reasoner.RegisterRule(new TransitiveDependencyRule($"{uriPrefix}:hat schulden bei", $"{uriPrefix}:gehört", true, false, uriPrefix));
