@@ -11,9 +11,4 @@
     <PackageReference Include="RDFSharp" Version="2.19.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataWriter\" />
-    <Folder Include="RuleData\" />
-  </ItemGroup>
-
 </Project>

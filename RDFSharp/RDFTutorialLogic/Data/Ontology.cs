@@ -2,7 +2,7 @@
 // <copyright file="Ontology.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
-// <author>Tom Pirich</author>
+// <author>Gregor Faiman, Tom Pirich</author>
 //-----------------------------------------------------------------------
 namespace RDFTutorialLogic.Data
 {
@@ -26,11 +26,12 @@ namespace RDFTutorialLogic.Data
         /// <param name="name">The name of the ontology.</param>
         /// <exception cref="ArgumentNullException">
         /// ... is thrown when the name is null.
+        /// ... is thrown if triple data is null.
         /// </exception>
-        public Ontology(string name)
+        public Ontology(string name, IEnumerable<RDFTriple> tripleData)
         {
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
-            this.tripleData = new List<RDFTriple>();
+            this.tripleData = tripleData ?? throw new ArgumentNullException(nameof(tripleData), "Triple data must not be null.");
         }
 
         /// <summary>
@@ -51,8 +52,6 @@ namespace RDFTutorialLogic.Data
             {
                 yield return triple;
             }
-
-            
         }
     }
 }
