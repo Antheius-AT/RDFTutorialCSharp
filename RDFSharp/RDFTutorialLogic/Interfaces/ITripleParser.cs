@@ -2,7 +2,7 @@
 // <copyright file="ITripleParser.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
-// <author>Gregor Faiman</author>
+// <author>Gregor Faiman, Tom Pirich</author>
 //-----------------------------------------------------------------------
 namespace RDFTutorialLogic.Interfaces
 {

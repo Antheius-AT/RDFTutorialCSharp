@@ -2,7 +2,7 @@
 // <copyright file="IDataReader.cs" company="FHWN">
 //     Copyright (c) FHWN. All rights reserved.
 // </copyright>
-// <author>Tom Pirich</author>
+// <author>Gregor Faiman, Tom Pirich</author>
 //-----------------------------------------------------------------------
 namespace RDFTutorialLogic.Interfaces
 {
