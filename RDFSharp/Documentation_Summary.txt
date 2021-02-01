@@ -42,6 +42,14 @@ Die Methodensignatur für das einlesen der Daten schaut, wie folgt, aus:
 Hier bekommen wir in Form eines Enumberable unsere Raw Triples zurück die dann in eine Ontologie integriert werden können. Doch davor werden diese an den sogenannten
 Triple parser übergeben. Dieser validiert die Mindestanforderungen/ Contraints für ein Raw Triple. 
 
+#### Struktur der CSV-Datei
+
+Die CSV Datei muss in einem bestimmen Format vorliegen, welches ich nun näher erläutern werde. Grundsätzlich muss das csv File einen Header haben, welcher wie folgt definiert ist:
+
+```Subject,Predicate,Object```
+
+
+
 
 INFERENZREGELN:
 Wenn das Objekt eines Triples irgendwo das Subjekt eines anderen Triples ist, dann hängen die beiden zusammen.
